@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan PlayBoyX</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
+body{
+    background:#020617;
+    color:white;
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(90deg,#020617,#0a0f2c);
+    padding:25px;
+    text-align:center;
+    border-bottom:2px solid #2563eb;
+}
+
+header h1{
+    color:#3b82f6;
+    font-size:34px;
+    text-shadow:0 0 10px #2563eb;
+}
+
+header h2{
+    color:#60a5fa;
+    font-size:20px;
+    margin-top:5px;
+    letter-spacing:2px;
+    text-shadow:0 0 8px #2563eb;
+}
+
+/* CONTAINER */
+.container{
+    padding:20px;
+}
+
+/* CARD */
+.card, .big-card{
+    background:#030b1a;
+    border:1px solid #2563eb;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    border:none;
+    background:#020617;
+    color:white;
+}
+
+/* BUTTON */
+button{
+    margin-top:15px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#1d4ed8;
+    box-shadow:0 0 12px #2563eb;
+}
+
+/* TITLES */
+h2{
+    color:#3b82f6;
+    margin-bottom:15px;
+}
+
+/* BOXES */
+.step, .proxy-box{
+    background:#020617;
+    border:1px solid #2563eb;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:15px;
+}
+
+/* ALERT */
+#msg{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+}
+
+/* ANIMAÇÃO */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.success{
+    animation: pulse 0.3s ease;
+    text-shadow: 0 0 12px #22c55e;
+}
+
+.error{
+    animation: pulse 0.3s ease;
+    text-shadow: 0 0 12px #ef4444;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    color:#64748b;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Jordan</h1>
+    <h2>PlayBoyX</h2>
+</header>
+
+<div class="container">
+
+<div class="card">
+    <h2>Atualizar IP</h2>
+
+    <label>Key de acesso</label>
+    <input type="text" id="key" placeholder="Digite sua key...">
+
+    <label>Novo IP</label>
+    <input type="text" id="ip" placeholder="Clique em buscar IP">
+
+    <button onclick="buscarIP()">Buscar IP</button>
+    <button onclick="atualizar()">Atualizar Agora</button>
+
+    <div id="msg"></div>
+</div>
+
+<div class="big-card">
+    <h2>Dados do Proxy</h2>
+
+    <div class="proxy-box">
+        🔥 Proxy HS Pescoço<br><br>
+        <b>Servidor:</b> 144.172.100.226<br>
+        <b>Porta:</b> 1110
+    </div>
+
+    <div class="proxy-box">
+        ⚡ Proxy HS Pescoço + Antena<br><br>
+        <b>Servidor:</b> 144.172.100.226<br>
+        <b>Porta:</b> 1119
+    </div>
+</div>
+
+<div class="big-card">
+    <h2>Guia de Instalação</h2>
+
+    <div class="step"><b>1. Baixar certificado</b></div>
+    <div class="step"><b>2. Instalar perfil</b></div>
+    <div class="step"><b>3. Ativar confiança</b></div>
+    <div class="step"><b>4. Configurar proxy</b></div>
+</div>
+
+<div class="big-card">
+    <h2>Recursos Necessários</h2>
+
+    <button onclick="window.open('https://www.mediafire.com/file/z5mgxmczilommnk/Dash+Cert+%F0%9F%91%8C.pem/file','_blank')">
+        Baixar Certificado
+    </button>
+</div>
+
+</div>
+
+<footer>
+    Jordanffz 2k26
+</footer>
+
+<script>
+function buscarIP(){
+    fetch("https://api.ipify.org?format=json")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("ip").value = data.ip;
+    });
+}
+
+function atualizar(){
+    let key = document.getElementById("key").value;
+    let msg = document.getElementById("msg");
+
+    msg.classList.remove("success","error");
+
+    if(key.startsWith("p")){
+        msg.style.color = "#22c55e";
+        msg.innerText = "✔ Chave de acesso confirmada";
+        msg.classList.add("success");
+    } else {
+        msg.style.color = "#ef4444";
+        msg.innerText = "✖ Key inválida";
+        msg.classList.add("error");
+    }
+}
+</script>
+
+</body>
+</html>
